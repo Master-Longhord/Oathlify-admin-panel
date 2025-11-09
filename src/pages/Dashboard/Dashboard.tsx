@@ -1,5 +1,4 @@
 import StatsCard from './components/StatsCard';
-// CORRECTED: Import LuCircleCheck and LuCircleX from the react-icons/lu library
 import { LuFileText, LuClock, LuCircleCheck, LuCircleX } from 'react-icons/lu';
 
 const Dashboard = () => {
@@ -27,7 +26,7 @@ const Dashboard = () => {
         <StatsCard
           title="Approved"
           value="5"
-          icon={LuCircleCheck} // <-- CORRECTED
+          icon={LuCircleCheck}
           iconBgColor="bg-brand-green-light"
         />
         <StatsCard
