@@ -1,0 +1,13 @@
+# Ignore dependencies, they are installed in the container
+node_modules
+
+# Ignore build output, it is created in the container
+dist
+
+# Ignore environment files, they should be passed at runtime
+.env
+.env.*
+
+# Ignore logs and cache
+npm-debug.log
+.vite

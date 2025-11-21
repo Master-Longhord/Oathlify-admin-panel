@@ -28,10 +28,9 @@ export const loginAdmin = async (login: string, password: string): Promise<Login
   }
 };
 
-// NEW FUNCTION
 export const refreshAccessToken = async (refreshToken: string): Promise<{ accessToken: string }> => {
   const response = await axios.post(`${apiBaseUrl}/auth/refresh-token`, {
     refreshToken,
   });
-  return response.data.tokens; // Assuming the new token is in response.data.tokens
+  return response.data.tokens;
 };
