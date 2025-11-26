@@ -81,7 +81,7 @@ const Pending = () => {
         </div>
         <div className="bg-brand-surface rounded-xl shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full text-left">
+            <table className="w-full text-left min-w-[600px]">
               <thead className="bg-brand-green-light text-brand-green-dark">
                 <tr>
                   <th className="p-4 font-semibold rounded-tl-xl">Applicant Name</th>
