@@ -5,6 +5,7 @@ import {
   LuCircleCheck,
   LuCircleX,
   LuSettings,
+  LuUsers, // <-- 1. IMPORT THE USERS ICON
   LuX,
 } from "react-icons/lu";
 
@@ -16,6 +17,7 @@ interface SidebarProps {
 const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
   const navLinks = [
     { name: "Dashboard", path: "/", icon: LuLayoutDashboard },
+    { name: "Users", path: "/users", icon: LuUsers }, // <-- 2. ADD THE USERS LINK HERE
     { name: "Pending", path: "/pending", icon: LuClock },
     { name: "Approved", path: "/approved", icon: LuCircleCheck },
     { name: "Declined", path: "/declined", icon: LuCircleX },
