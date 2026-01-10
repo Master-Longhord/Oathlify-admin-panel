@@ -23,10 +23,7 @@ export const getApprovedAffidavits = async (): Promise<Affidavit[]> => {
 
 export const getDeclinedAffidavits = async (): Promise<Affidavit[]> => {
   try {
-    // Placeholder: Replace with the actual endpoint when it is available
-    // const response = await apiClient.get('/admin/declined-affidavits');
-    // return response.data;
-    return []; // Return an empty array for now
+    return [];
   } catch (error) {
     console.error("Failed to fetch declined affidavits:", error);
     throw error;
@@ -49,6 +46,28 @@ export const stampAffidavit = async (id: string): Promise<AffidavitDetail> => {
     return response.data;
   } catch (error) {
     console.error(`Failed to stamp affidavit with id ${id}:`, error);
+    throw error;
+  }
+};
+
+export const getPreviewPdf = async (id: string): Promise<Blob> => {
+  try {
+    const response = await apiClient.get(`/admin/affidavits/${id}/preview-pdf`, {
+      responseType: 'blob',
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to load PDF preview for affidavit ${id}:`, error);
+    throw error;
+  }
+};
+
+export const getVideoUrl = async (id: string): Promise<{ videoUrl: string }> => {
+  try {
+    const response = await apiClient.get(`/admin/affidavits/${id}/video-url`);
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to get video URL for affidavit ${id}:`, error);
     throw error;
   }
 };

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { LuEye } from 'react-icons/lu';
-import { getPendingAffidavits, getAffidavitById, stampAffidavit } from '../../services/affidavitService';
+import { getPendingAffidavits, getAffidavitById, stampAffidavit, getVideoUrl } from '../../services/affidavitService';
 import type { Affidavit, AffidavitDetail } from '../../types/affidavit.d';
 import AffidavitDetailsModal from './components/AffidavitDetailsModal';
+import VideoPlayerModal from './components/VideoPlayerModal';
 
 const Pending = () => {
   const [affidavits, setAffidavits] = useState<Affidavit[]>([]);
@@ -13,6 +14,9 @@ const Pending = () => {
   const [isModalLoading, setIsModalLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStamping, setIsStamping] = useState(false);
+
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchAffidavits = async () => {
@@ -61,7 +65,16 @@ const Pending = () => {
   
   const handleDecline = (id: string) => {
     console.log("Declining affidavit:", id);
-    handleCloseModal();
+  };
+
+  const handlePlayVideo = async (id: string) => {
+    try {
+      const data = await getVideoUrl(id);
+      setVideoUrl(data.videoUrl);
+      setIsVideoModalOpen(true);
+    } catch {
+      alert('Failed to get video URL.');
+    }
   };
 
   if (isLoading) {
@@ -116,14 +129,21 @@ const Pending = () => {
         </div>
       </div>
 
-      {isModalOpen && (
+      {isModalOpen && !isModalLoading && selectedAffidavit && (
         <AffidavitDetailsModal
           affidavit={selectedAffidavit}
-          isLoading={isModalLoading}
           isStamping={isStamping}
           onClose={handleCloseModal}
           onApprove={handleApprove}
           onDecline={handleDecline}
+          onPlayVideo={handlePlayVideo}
+        />
+      )}
+
+      {isVideoModalOpen && videoUrl && (
+        <VideoPlayerModal 
+          videoUrl={videoUrl}
+          onClose={() => setIsVideoModalOpen(false)}
         />
       )}
     </>

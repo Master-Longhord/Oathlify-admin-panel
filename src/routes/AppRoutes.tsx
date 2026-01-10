@@ -4,6 +4,8 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import Pending from '../pages/Pending/Pending';
 import Approved from '../pages/Approved/Approved';
 import Users from '../pages/Users/Users';
+import Settings from '../pages/Settings/Settings';
+import Declined from '../pages/Declined/Declined';
 import LoginPage from '../pages/Auth/LoginPage';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 
@@ -18,6 +20,8 @@ const AppRoutes = () => {
           <Route path="pending" element={<Pending />} />
           <Route path="approved" element={<Approved />} />
           <Route path="users" element={<Users />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="declined" element={<Declined />} />
         </Route>
       </Route>
     </Routes>
