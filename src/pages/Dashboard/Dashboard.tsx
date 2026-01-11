@@ -48,6 +48,7 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard
+          data-tour="dashboard-card"
           title="Total Users"
           value={stats?.totalUsers.toString() ?? '0'}
           icon={LuUsers}

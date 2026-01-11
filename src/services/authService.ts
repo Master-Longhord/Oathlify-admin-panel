@@ -9,6 +9,7 @@ export interface LoginResponse {
     lastName: string;
     email: string;
     role: 'ADMIN';
+    hasCompletedOnboarding: boolean;
   };
   tokens: {
     accessToken: string;
