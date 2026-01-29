@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import StatsCard from './components/StatsCard';
-import { LuFileText, LuClock, LuUsers, LuWallet } from 'react-icons/lu';
-import { getDashboardStats, type DashboardStats } from '../../services/dashboardService';
+import { LuClock, LuScan, LuFileCheck2 } from 'react-icons/lu';
+import { getAdminStats, type AdminStats } from '../../services/dashboardService';
 import { getPendingAffidavits } from '../../services/affidavitService';
 import type { Affidavit } from '../../types/affidavit.d';
 
 const Dashboard = () => {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [stats, setStats] = useState<AdminStats | null>(null);
   const [recentSubmissions, setRecentSubmissions] = useState<Affidavit[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,7 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
       try {
         const [statsData, pendingData] = await Promise.all([
-          getDashboardStats(),
+          getAdminStats(),
           getPendingAffidavits(),
         ]);
 
@@ -43,34 +43,28 @@ const Dashboard = () => {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold">Dashboard Overview</h1>
-        <p className="text-brand-text-secondary">Manage and review all affidavit submissions</p>
+        <p className="text-brand-text-secondary">Your daily tasks and pending reviews.</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <StatsCard
           data-tour="dashboard-card"
-          title="Total Users"
-          value={stats?.totalUsers.toString() ?? '0'}
-          icon={LuUsers}
-          iconBgColor="bg-blue-100"
-        />
-        <StatsCard
           title="Pending Affidavits"
           value={stats?.pendingAffidavits.toString() ?? '0'}
           icon={LuClock}
           iconBgColor="bg-brand-yellow"
         />
         <StatsCard
-          title="Total Revenue"
-          value={`₦${(stats?.totalRevenue ?? 0).toLocaleString()}`}
-          icon={LuWallet}
-          iconBgColor="bg-green-100"
+          title="Pending KYC"
+          value={stats?.pendingKyc.toString() ?? '0'}
+          icon={LuScan}
+          iconBgColor="bg-blue-100"
         />
         <StatsCard
-          title="Waitlist"
-          value={stats?.waitlistCount.toString() ?? '0'}
-          icon={LuFileText}
-          iconBgColor="bg-gray-100"
+          title="Stamped Today"
+          value={stats?.documentsStampedToday?.toString() ?? '0'}
+          icon={LuFileCheck2}
+          iconBgColor="bg-green-100"
         />
       </div>
 

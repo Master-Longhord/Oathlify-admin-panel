@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/handle-login'); // <-- THE CHANGE IS HERE
     } catch {
       setError('Failed to sign in. Please check your credentials.');
     } finally {

@@ -8,7 +8,7 @@ export interface LoginResponse {
     firstName: string;
     lastName: string;
     email: string;
-    role: 'ADMIN';
+    role: 'ADMIN' | 'SUPER_ADMIN';
     hasCompletedOnboarding: boolean;
   };
   tokens: {

@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth"; // <-- IMPORT THE BRAIN
 import {
   LuLayoutDashboard,
   LuClock,
   LuCircleCheck,
   LuCircleX,
   LuSettings,
-  LuUsers, // <-- 1. IMPORT THE USERS ICON
+  LuUsers,
+  LuFileText, // <-- Import Template Icon for Super Admin
   LuX,
 } from "react-icons/lu";
 
@@ -15,14 +17,58 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
-  const navLinks = [
-    { name: "Dashboard", path: "/", icon: LuLayoutDashboard },
-    { name: "Users", path: "/users", icon: LuUsers }, // <-- 2. ADD THE USERS LINK HERE
-    { name: "Pending", path: "/pending", icon: LuClock },
-    { name: "Approved", path: "/approved", icon: LuCircleCheck },
-    { name: "Declined", path: "/declined", icon: LuCircleX },
-    { name: "Settings", path: "/settings", icon: LuSettings },
+  const { user } = useAuth(); // <-- Get the logged-in user
+
+  // Define links with logic for who can see them and where they go
+  const allNavLinks = [
+    { 
+      name: "Dashboard", 
+      // If Super Admin -> Go to /super-admin, Else -> Go to /
+      path: user?.role === 'SUPER_ADMIN' ? '/super-admin' : '/', 
+      icon: LuLayoutDashboard, 
+      roles: ['ADMIN', 'SUPER_ADMIN'] 
+    },
+    { 
+      name: "Users", 
+      // If Super Admin -> Go to /super-admin/users, Else -> Go to /users
+      path: user?.role === 'SUPER_ADMIN' ? '/super-admin/users' : '/users', 
+      icon: LuUsers, 
+      roles: ['ADMIN', 'SUPER_ADMIN'] 
+    },
+    { 
+      name: "Pending", 
+      path: "/pending", 
+      icon: LuClock, 
+      roles: ['ADMIN'] // Only Lawyers see this
+    },
+    { 
+      name: "Approved", 
+      path: "/approved", 
+      icon: LuCircleCheck, 
+      roles: ['ADMIN'] // Only Lawyers see this
+    },
+    { 
+      name: "Declined", 
+      path: "/declined", 
+      icon: LuCircleX, 
+      roles: ['ADMIN'] // Only Lawyers see this
+    },
+    { 
+      name: "Templates", 
+      path: "/super-admin/templates", 
+      icon: LuFileText, 
+      roles: ['SUPER_ADMIN'] // Only Super Admin sees this
+    },
+    { 
+      name: "Settings", 
+      path: "/settings", 
+      icon: LuSettings, 
+      roles: ['ADMIN', 'SUPER_ADMIN'] 
+    },
   ];
+
+  // Filter the links based on the user's role
+  const navLinks = allNavLinks.filter(link => user && link.roles.includes(user.role));
 
   return (
     <>
@@ -44,12 +90,16 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         <nav className="flex flex-col space-y-2">
           {navLinks.map((link) => {
             const IconComponent = link.icon;
+            // Check if this link is currently active
+            // We need custom logic because '/super-admin' is a sub-path
+            const isHome = link.path === '/' || link.path === '/super-admin';
+            
             return (
               <NavLink
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                end={link.path === "/"}
+                end={isHome} // Only exact match for dashboard pages
                 className={({ isActive }) =>
                   `flex items-center gap-x-4 p-3 rounded-full text-lg transition-colors ${
                     isActive ? "font-semibold" : "hover:bg-white/10"

@@ -1,19 +1,17 @@
 import apiClient from './apiClient';
 
-export interface DashboardStats {
-  totalUsers: number;
-  waitlistCount: number;
-  pendingKyc: number;
+export interface AdminStats {
   pendingAffidavits: number;
-  totalRevenue: number;
+  pendingKyc: number;
+  documentsStampedToday: number;
 }
 
-export const getDashboardStats = async (): Promise<DashboardStats> => {
+export const getAdminStats = async (): Promise<AdminStats> => {
   try {
     const response = await apiClient.get('/admin/stats');
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch dashboard stats:", error);
+    console.error("Failed to fetch admin stats:", error);
     throw error;
   }
 };
