@@ -38,8 +38,8 @@ const Pending = () => {
     try {
       const details = await getAffidavitById(id);
       setSelectedAffidavit(details);
-    } catch {
-      console.error("Failed to load affidavit details");
+    } catch (error) {
+      console.error("Failed to load affidavit details", error);
     } finally {
       setIsModalLoading(false);
     }
@@ -129,6 +129,7 @@ const Pending = () => {
         </div>
       </div>
 
+      {/* Logic: Only render if selectedAffidavit is NOT null */}
       {isModalOpen && !isModalLoading && selectedAffidavit && (
         <AffidavitDetailsModal
           affidavit={selectedAffidavit}

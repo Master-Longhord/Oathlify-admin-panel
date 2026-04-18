@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { LuEye } from 'react-icons/lu';
-// UPDATED: Importing the Platform specific functions
 import { getPlatformUsers, getPlatformUserById, deletePlatformUser } from '../../services/userService';
 import type { User, UserDetail } from '../../types/user.d';
 import UserDetailsModal from '../../pages/Users/components/UserDetailsModal';
@@ -18,7 +17,6 @@ const SuperAdminUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        // UPDATED: Using getPlatformUsers
         const data = await getPlatformUsers();
         setUsers(data);
       } catch {

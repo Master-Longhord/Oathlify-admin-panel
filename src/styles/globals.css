@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Your Existing Brand Colors */
+  /* Existing Brand Colors */
   --brand-green-dark: #1C3A3A;
   --brand-green-light: #D4F7A5;
   --brand-background: #F9F9F9;
@@ -30,7 +30,7 @@ body {
 
 .driver-popover-next-btn,
 .driver-popover-done-btn {
-  background-color: var(--brand-green-dark) !important; /* Uses your theme color */
+  background-color: var(--brand-green-dark) !important;
   color: white !important;
   text-shadow: none !important;
   border-radius: 8px !important;

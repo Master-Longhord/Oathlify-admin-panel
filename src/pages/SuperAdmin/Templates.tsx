@@ -15,12 +15,10 @@ const Templates = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fetch Templates
   const fetchTemplates = async () => {
     try {
       setIsLoading(true);
@@ -88,7 +86,6 @@ const Templates = () => {
   return (
     <>
       <div className="space-y-6">
-        {/* MOBILE OPTIMIZATION: flex-col on mobile, flex-row on desktop */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <div>
             <h1 className="text-3xl font-bold text-brand-text-primary">Templates</h1>

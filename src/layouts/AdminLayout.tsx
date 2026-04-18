@@ -50,7 +50,6 @@ const AdminLayout = () => {
           }
         ],
         onDestroyed: () => {
-          // This is called when the tour is closed or finished
           try {
             completeOnboarding();
           } catch {

@@ -2,12 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 
 // Layouts for each "Mansion"
 import AdminLayout from '../layouts/AdminLayout';
-import SuperAdminLayout from '../layouts/SuperAdminLayout'; // We will create this next
+import SuperAdminLayout from '../layouts/SuperAdminLayout';
 
 // Auth Components
 import LoginPage from '../pages/Auth/LoginPage';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
-import LoginRedirect from '../components/auth/LoginRedirect'; // We will create this
+import LoginRedirect from '../components/auth/LoginRedirect';
 
 // Admin (Lawyer) Pages
 import Dashboard from '../pages/Dashboard/Dashboard';
@@ -18,7 +18,7 @@ import Settings from '../pages/Settings/Settings';
 import Declined from '../pages/Declined/Declined';
 
 // Super Admin Pages
-import SuperAdminDashboard from '../pages/SuperAdmin/Dashboard'; // We will create this
+import SuperAdminDashboard from '../pages/SuperAdmin/Dashboard';
 import SuperAdminUsers from '../pages/SuperAdmin/Users';
 import Templates from '../pages/SuperAdmin/Templates';
 
